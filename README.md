@@ -1,68 +1,137 @@
-[Facebook Marketplace Details](https://apify.com/monumental_world/facebook-marketplace-details?fpr=data)
+[Facebook Marketplace Details](https://apify.com/data-slayer/facebook-marketplace-details?fpr=data)
 
-"# Facebook Marketplace Listing Details Export to Excel (cookieless)
+Extract comprehensive Facebook Marketplace listing data without authentication or cookies. This scraper retrieves detailed product information, pricing, seller details, location data, and vehicle specifications directly from listing IDs — perfect for dropshippers who need fast, reliable access to marketplace inventory without the hassle of managing login credentials.
 
-## Need to download Facebook Marketplace data to Excel? This tool helps you extract listing details without logging in
+## Key Features
 
-Perfect for dropshippers, resellers, and business owners who want to analyze marketplace inventory, track pricing trends, and discover sourcing opportunities—all without needing a Facebook account or any technical skills.
+🔒 **Cookieless / No Login Required** - Access Facebook Marketplace listing data without authentication, cookies, or account credentials. Run scrapes at scale without worrying about session management or account restrictions.
 
-## Step-by-Step Guide
+📈 **Scalable Architecture** - Built to handle high-volume data extraction efficiently. Process multiple listing IDs in parallel to gather competitive intelligence and inventory data across entire marketplaces.
 
-**Step 1:** Find the Facebook Marketplace listing you want to analyze and copy its Listing ID (the unique number in the URL).
+✅ **Rich Listing Data** - Capture complete listing details including title, description, pricing (formatted price and currency), condition, location (coordinates and postal codes), creation time, availability status, delivery options, and comprehensive vehicle specifications (make, model, odometer, transmission, fuel type, horsepower, exterior/interior colors).
 
-**Step 2:** Paste the Listing ID into the tool and click ""Start."" No login or cookies required—the tool works instantly.
+⚡ **Fast & Reliable** - Optimized extraction engine delivers consistent results with minimal latency. Get the data you need to make sourcing decisions quickly and confidently.
 
-**Step 3:** Download your data as Excel, CSV, or XML. Open it in Excel, Google Sheets, or any spreadsheet program to start analyzing.
+📊 **Export-Ready Formats** - Download your extracted data in JSON, CSV, or Excel formats for immediate integration with inventory management systems, pricing tools, or analytics platforms.
 
-## What columns will I get?
+## Use Cases
 
-Your download will include the following columns:
+**Dropshippers & Resellers**: Identify underpriced inventory opportunities in local markets by extracting listing prices, conditions, and seller locations. Build a database of potential products to source, compare pricing across regions, and discover trending items with minimal upfront investment.
 
-- **Listing ID** - Unique identifier for the marketplace item
-- **Listing URL** - Direct link to the Facebook Marketplace listing
-- **Seller Name** - Name of the person or business selling the item
-- **Seller Rating** - Average rating score for the seller
-- **Seller Total Reviews** - Number of reviews the seller has received
-- **Listing Title** - Full title/description of the item being sold
-- **Listing Price** - Price in dollars
-- **Listing Condition** - Condition status (New, Used, Like New, etc.)
-- **Listing Location City** - City where the item is located
-- **Listing Location State** - State abbreviation for the listing location
-- **Listing Views** - Number of times the listing has been viewed
-- **Listing Posted Date** - Date when the listing was created
-- **Listing Category** - Marketplace category (Vehicles, Electronics, etc.)
-- **Listing Status** - Whether the listing is active, sold, or expired
+**Market Research Analysts**: Track pricing trends, inventory availability, and product conditions across Facebook Marketplace categories. Analyze vehicle specifications, seller types, and geographic distribution to understand market dynamics and competitive positioning.
 
-## How to use this data
+**Lead Generation Specialists**: Extract seller contact opportunities and messaging availability from active listings. Build targeted outreach lists based on product categories, locations, and listing characteristics to connect buyers with sellers or offer value-added services.
 
-**Identify Local Inventory Opportunities:** Sort by location and category to find items available in your area that you can purchase and resell. Filter by condition and price to spot undervalued items with resale potential.
+## Inputs
 
-**Price Competitively:** Export multiple listings in the same category to compare pricing. Use Excel to calculate average prices and identify listings priced below market value that represent good buying opportunities.
+| Field | Type | Description |
+| --- | --- | --- |
+| listingId | String | The unique Facebook Marketplace listing ID to fetch details for. Found in the listing URL (e.g., `1547618196594748` from `facebook.com/marketplace/item/1547618196594748/`) |
 
-**Build a Sourcing Database:** Track seller ratings and review counts to identify reliable suppliers. Monitor posting dates and view counts to understand how quickly items sell at different price points, helping you make smarter purchasing decisions.
+## Outputs
 
-## Input Settings
+**Formats**: JSON, CSV, Excel
 
-**Listing ID:** This is the unique number that identifies each Facebook Marketplace listing. You can find it in the listing's URL—it's the string of numbers after ""item/"" in the web address. Just copy and paste this number into the tool to fetch all the details for that specific listing.
+**Key Fields Extracted**:
 
-## Frequently Asked Questions
+- `id` - Unique listing identifier
+- `marketplace_listing_title` - Product title
+- `custom_title` - Seller's custom title
+- `formatted_price` - Display price with currency symbol
+- `listing_price` - Structured price object (amount, currency, offset)
+- `condition` - Item condition (USED, NEW, etc.)
+- `redacted_description` - Full product description
+- `location_text` - Human-readable location
+- `location` - Geographic coordinates (latitude, longitude) and postal code
+- `creation_time` - Unix timestamp of listing creation
+- `is_live` - Listing active status
+- `is_sold` - Sale completion status
+- `is_pending` - Transaction pending status
+- `delivery_types` - Available delivery methods (IN_PERSON, SHIPPING)
+- `messaging_enabled` - Whether buyer can message seller
+- `vehicle_make_display_name` - Vehicle manufacturer (for vehicle listings)
+- `vehicle_model_display_name` - Vehicle model
+- `vehicle_odometer_data` - Mileage with unit (kilometers/miles)
+- `vehicle_transmission_type` - Transmission type (AUTOMATIC, MANUAL)
+- `vehicle_fuel_type` - Fuel type (PETROL, DIESEL, ELECTRIC)
+- `vehicle_exterior_color` - Exterior color
+- `vehicle_seller_type` - Seller classification (PRIVATE_SELLER, DEALER)
+- `vehicle_specifications` - Detailed specs including horsepower, engine size, gas mileage
+- `share_uri` - Direct link to listing
 
-**Q: Do I need a Facebook account?**
+## How to Use
 
-A: No! This tool works without any login. You don't need to be signed into Facebook or provide any credentials.
+**Step 1**: Enter the target listing ID in the `listingId` input field. You can find this ID in the Facebook Marketplace listing URL (the numeric string after `/item/`).
 
-**Q: Can I open this in Google Sheets?**
+**Step 2**: Click "Start" to run the scraper. The actor will fetch comprehensive listing details directly from Facebook's servers.
 
-A: Yes, absolutely. Just upload the CSV file to Google Sheets using File > Import, and all your data will appear in a spreadsheet you can edit and share.
+**Step 3**: Once complete, download your data in JSON, CSV, or Excel format from the dataset tab. Import directly into your inventory management system or analysis tools.
 
-**Q: How many listings can I export at once?**
+## Sample Output
 
-A: This tool exports one listing at a time. To analyze multiple listings, simply run the tool for each Listing ID you want to track.
+```
+{
+  "id": "1547618196594748",
+  "marketplace_listing_title": "2013 MINI Cooper",
+  "custom_title": "2013 MINI cooper",
+  "formatted_price": {
+    "text": "AU$11,990"
+  },
+  "listing_price": {
+    "amount": "11990.00",
+    "currency": "AUD"
+  },
+  "condition": "USED",
+  "redacted_description": {
+    "text": "2013 R56 JCW, 192,000km on the clock, timing chain done 15000km ago..."
+  },
+  "location_text": {
+    "text": "Clyde, VIC"
+  },
+  "location": {
+    "latitude": -38.125305175781,
+    "longitude": 145.36560058594,
+    "reverse_geocode_detailed": {
+      "country_alpha_two": "AU",
+      "postal_code_trimmed": "3978"
+    }
+  },
+  "creation_time": 1759872299,
+  "is_live": true,
+  "is_sold": false,
+  "is_pending": true,
+  "delivery_types": ["IN_PERSON"],
+  "messaging_enabled": true,
+  "vehicle_make_display_name": "MINI",
+  "vehicle_model_display_name": "Cooper",
+  "vehicle_odometer_data": {
+    "unit": "KILOMETERS",
+    "value": 192000
+  },
+  "vehicle_transmission_type": "AUTOMATIC",
+  "vehicle_fuel_type": "PETROL",
+  "vehicle_exterior_color": "black",
+  "vehicle_seller_type": "PRIVATE_SELLER",
+  "share_uri": "https://www.facebook.com/marketplace/item/1547618196594748/"
+}
+```
 
-**Q: Is this data updated in real-time?**
+## 🧩 Other Facebook Actors by Data Slayer
 
-A: Yes, the tool fetches current information each time you run it, so you'll always get the latest price, status, and view count.
+| Actor | What it does | Link |
+| --- | --- | --- |
+| Facebook Page Details Scraper | Get full page profiles — followers, contact info, ratings | [Try it](https://apify.com/data-slayer/facebook-page-details) |
+| Facebook Posts Scraper | Extract posts from any Facebook page | [Try it](https://apify.com/data-slayer/facebook-page-posts) |
+| Facebook Group Posts Scraper | Extract posts from any public Facebook group | [Try it](https://apify.com/data-slayer/facebook-group-posts) |
+| Facebook Reviews Scraper | Extract customer reviews from any Facebook page | [Try it](https://apify.com/data-slayer/facebook-page-reviews) |
+| Facebook Page Search Scraper | Search and discover Facebook pages by keyword | [Try it](https://apify.com/data-slayer/facebook-search-pages) |
+| Facebook People Search Scraper | Search and find Facebook profiles by keyword | [Try it](https://apify.com/data-slayer/facebook-search-people) |
+| Facebook Events Scraper | Discover Facebook events by keyword search | [Try it](https://apify.com/data-slayer/facebook-search-events) |
 
----
+## 💬 Feedback and Support
 
-*Related searches: facebook marketplace scraper, marketplace listing data extraction, scrape facebook marketplace listings, export marketplace listings, marketplace data mining, lead generation from marketplace, seller contact data extraction*"
+We actively maintain this actor and ship improvements based on user feedback. If you run into any issues or have ideas for new features:
+
+- Create an issue on the Actor's **Issues tab** in Apify Console
+- Rate the actor if it helped you — it helps others find it too
+We typically respond within 24 hours.
